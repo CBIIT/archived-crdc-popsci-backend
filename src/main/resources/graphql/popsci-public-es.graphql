@@ -1,0 +1,6 @@
+schema {
+    query: QueryType
+}
+
+type QueryType {
+}
