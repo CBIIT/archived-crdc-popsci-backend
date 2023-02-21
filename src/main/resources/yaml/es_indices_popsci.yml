@@ -1,0 +1,248 @@
+# Indices settings
+Indices:
+  # First index
+  # Name of the index to be created, existing index with same name will be deleted
+  - index_name: cases
+    type: neo4j
+    # type mapping for each property of the index
+    mapping:
+      arm:
+        type: keyword
+      arms:
+        type: keyword
+      biospecimens_available:
+        type: keyword
+      case_id:
+        type: keyword
+      case_ids:
+        type: keyword
+      center:
+        type: keyword
+      centers:
+        type: keyword
+      clinical_trial:
+        type: keyword
+      clinical_trials:
+        type: keyword
+      dx_age:
+        type: integer
+      dx_ages:
+        type: integer
+      dx_cancer_type:
+        type: keyword
+      dx_cancer_types:
+        type: keyword
+      enrollment_age:
+        type: integer
+      enrollment_ages:
+        type: integer
+      enrollment_year:
+        type: integer
+      enrollment_years:
+        type: integer
+      ethnicities:
+        type: keyword
+      ethnicity:
+        type: keyword
+      race:
+        type: keyword
+      races:
+        type: keyword
+      sex:
+        type: keyword
+      sexes:
+        type: keyword
+      studies:
+        type: keyword
+      study:
+        type: keyword
+      study_type:
+        type: keyword
+      study_types:
+        type: keyword
+        
+    # Cypher query will be used to retrieve data from Neo4j, and index into Elasticsearch
+    cypher_query: "
+      MATCH (d:demo)-[:demo_of_breast_case]->(c)-[:breast_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
+      RETURN DISTINCT
+
+      c.breast_case_id AS case_id,
+      c.breast_case_id AS case_ids,
+
+      c.arm AS arm,
+      c.arm AS arms,
+      c.biosp_f AS biospecimens_available,
+      c.center AS center,
+      c.center AS centers,
+      c.plco_dx_age AS dx_age,
+      c.plco_dx_age AS dx_ages,
+      c.plco_dx AS dx_cancer_type,
+      c.plco_dx AS dx_cancer_types,
+      c.rndyear AS enrollment_year,
+      c.rndyear AS enrollment_years,
+
+      co.cohort_id AS studies,
+      co.cohort_id AS study,
+
+      ct.clinical_trial_short_name AS clinical_trial,
+      ct.clinical_trial_short_name AS clinical_trials,
+      ct.clinical_trial_type AS study_type,
+      ct.clinical_trial_type AS study_types,
+
+      d.age AS enrollment_age,
+      d.age AS enrollment_ages,
+      d.hispanic_f AS ethnicities,
+      d.hispanic_f AS ethnicity,
+      d.race7 AS race,
+      d.race7 AS races,
+      d.sex AS sex,
+      d.sex AS sexes
+
+      UNION
+
+      MATCH (d:demo)-[:demo_of_colo_case]->(c)-[:colo_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
+      RETURN DISTINCT
+
+      c.colo_case_id AS case_id,
+      c.colo_id AS case_ids,
+
+      c.arm AS arm,
+      c.arm AS arms,
+      c.biosp_f AS biospecimens_available,
+      c.center AS center,
+      c.center AS centers,
+      c.plco_dx_age AS dx_age,
+      c.plco_dx_age AS dx_ages,
+      c.plco_dx AS dx_cancer_type,
+      c.plco_dx AS dx_cancer_types,
+      c.rndyear AS enrollment_year,
+      c.rndyear AS enrollment_years,
+
+      co.cohort_id AS studies,
+      co.cohort_id AS study,
+
+      ct.clinical_trial_short_name AS clinical_trial,
+      ct.clinical_trial_short_name AS clinical_trials,
+      ct.clinical_trial_type AS study_type,
+      ct.clinical_trial_type AS study_types,
+
+      d.age AS enrollment_age,
+      d.age AS enrollment_ages,
+      d.hispanic_f AS ethnicities,
+      d.hispanic_f AS ethnicity,
+      d.race7 AS race,
+      d.race7 AS races,
+      d.sex AS sex,
+      d.sex AS sexes
+
+      UNION
+
+      MATCH (d:demo)-[:demo_of_lung_case]->(c)-[:lung_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
+      RETURN DISTINCT
+
+      c.lung_case_id AS case_id,
+      c.lung_case_id AS case_ids,
+
+      c.arm AS arm,
+      c.arm AS arms,
+      c.biosp_f AS biospecimens_available,
+      c.center AS center,
+      c.center AS centers,
+      c.plco_dx_age AS dx_age,
+      c.plco_dx_age AS dx_ages,
+      c.plco_dx AS dx_cancer_type,
+      c.plco_dx AS dx_cancer_types,
+      c.rndyear AS enrollment_year,
+      c.rndyear AS enrollment_years,
+
+      co.cohort_id AS studies,
+      co.cohort_id AS study,
+
+      ct.clinical_trial_short_name AS clinical_trial,
+      ct.clinical_trial_short_name AS clinical_trials,
+      ct.clinical_trial_type AS study_type,
+      ct.clinical_trial_type AS study_types,
+
+      d.age AS enrollment_age,
+      d.age AS enrollment_ages,
+      d.hispanic_f AS ethnicities,
+      d.hispanic_f AS ethnicity,
+      d.race7 AS race,
+      d.race7 AS races,
+      d.sex AS sex,
+      d.sex AS sexes
+
+      UNION
+
+      MATCH (d:demo)-[:demo_of_ovar_case]->(c)-[:ovar_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
+      RETURN DISTINCT
+
+      c.ovar_case_id AS case_id,
+      c.ovar_case_id AS case_ids,
+
+      c.arm AS arm,
+      c.arm AS arms,
+      c.biosp_f AS biospecimens_available,
+      c.center AS center,
+      c.center AS centers,
+      c.plco_dx_age AS dx_age,
+      c.plco_dx_age AS dx_ages,
+      c.plco_dx AS dx_cancer_type,
+      c.plco_dx AS dx_cancer_types,
+      c.rndyear AS enrollment_year,
+      c.rndyear AS enrollment_years,
+
+      co.cohort_id AS studies,
+      co.cohort_id AS study,
+
+      ct.clinical_trial_short_name AS clinical_trial,
+      ct.clinical_trial_short_name AS clinical_trials,
+      ct.clinical_trial_type AS study_type,
+      ct.clinical_trial_type AS study_types,
+
+      d.age AS enrollment_age,
+      d.age AS enrollment_ages,
+      d.hispanic_f AS ethnicities,
+      d.hispanic_f AS ethnicity,
+      d.race7 AS race,
+      d.race7 AS races,
+      d.sex AS sex,
+      d.sex AS sexes
+
+      UNION
+
+      MATCH (d:demo)-[:demo_of_pros_case]->(c)-[:pros_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
+      RETURN DISTINCT
+
+      c.pros_case_id AS case_id,
+      c.pros_case_id AS case_ids,
+
+      c.arm AS arm,
+      c.arm AS arms,
+      c.biosp_f AS biospecimens_available,
+      c.center AS center,
+      c.center AS centers,
+      c.plco_dx_age AS dx_age,
+      c.plco_dx_age AS dx_ages,
+      c.plco_dx AS dx_cancer_type,
+      c.plco_dx AS dx_cancer_types,
+      c.rndyear AS enrollment_year,
+      c.rndyear AS enrollment_years,
+
+      co.cohort_id AS studies,
+      co.cohort_id AS study,
+
+      ct.clinical_trial_short_name AS clinical_trial,
+      ct.clinical_trial_short_name AS clinical_trials,
+      ct.clinical_trial_type AS study_type,
+      ct.clinical_trial_type AS study_types,
+
+      d.age AS enrollment_age,
+      d.age AS enrollment_ages,
+      d.hispanic_f AS ethnicities,
+      d.hispanic_f AS ethnicity,
+      d.race7 AS race,
+      d.race7 AS races,
+      d.sex AS sex,
+      d.sex AS sexes
+      "
