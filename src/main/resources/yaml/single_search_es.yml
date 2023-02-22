@@ -16,11 +16,3 @@ queries:
         - enrollment_years
     result:
       type: object_array
-
-    index:
-      - files
-    filter:
-      type: default
-      caseInsensitive: true
-    result:
-      type: object_array
