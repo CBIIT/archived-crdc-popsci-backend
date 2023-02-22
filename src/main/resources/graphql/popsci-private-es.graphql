@@ -1,0 +1,92 @@
+type CaseOverview {
+    case_ids: String
+    clinical_trial: String
+    study: String
+    center: String
+    arm: String
+    enrollment_age: Float
+    sex: String
+    race: String
+    ethnicity: String
+    enrollment_year: Float
+}
+
+type SearchResult {
+    numberOfPrograms: Int
+    numberOfStudies: Int
+    numberOfCases: Int
+    numberOfFiles: Int
+
+    caseCountByStudy: [GroupCount]
+    caseCountByEnrollmentYear: [GroupCount]
+    caseCountByEnrollmentAge: [GroupCount]
+    caseCountBySex: [GroupCount]
+    caseCountByRace: [GroupCount]
+    caseCountByEthnicity: [GroupCount]
+
+    filterCaseCountByStudy: [GroupCount]
+    filterCaseCountByStudyType: [GroupCount]
+    filterCaseCountByEnrollmentYear: [GroupCount]
+    filterCaseCountByEnrollmentAge: [GroupCount]
+    filterCaseCountBySex: [GroupCount]
+    filterCaseCountByRace: [GroupCount]
+    filterCaseCountByEthnicity: [GroupCount]
+    filterCaseCountByDiagnosedCancerType: [GroupCount]
+    filterCaseCountByDiagnosedAge: [GroupCount]
+    filterCaseCountByBiospecimensAvailable: [GroupCount]
+}
+type GroupCount {
+    group: String
+    cases: Int
+}
+
+schema {
+    query: QueryType
+}
+
+type QueryType {
+    esVersion: String
+    numberOfPrograms: Int
+    numberOfStudies: Int
+    numberOfCases: Int
+    numberOfSamples: Int
+    numberOfLabProcedures: Int
+    numberOfFiles: Int
+
+    searchCases (
+        case_ids: [String] = [],
+
+        studies: [String] = [],
+        study_types: [String] = [],
+        enrollment_years: [Float] = [],
+        enrollment_ages: [Float] = [],
+        sexes: [String] = [],
+        races: [String] = [],
+        ethnicities: [String] = [],
+        dx_cancer_types: [String] = [],
+        dx_ages: [Float] = [],
+        biospecimens_available: [String] = [],
+    ): SearchResult
+
+    caseOverview (
+        case_ids: [String] = [],
+
+        studies: [String] = [],
+        study_types: [String] = [],
+        enrollment_years: [Float] = [],
+        enrollment_ages: [Float] = [],
+        sexes: [String] = [],
+        races: [String] = [],
+        ethnicities: [String] = [],
+        dx_cancer_types: [String] = [],
+        dx_ages: [Float] = [],
+        biospecimens_available: [String] = [],
+
+        order_by: String = "",
+        sort_direction: String = "ASC",
+        first: Int = 10,
+        offset: Int = 0
+    ): [CaseOverview]
+
+    
+}
