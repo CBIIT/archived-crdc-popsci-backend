@@ -1,6 +1,30 @@
+type StudyInfo {
+    cases: Int
+    program: String 
+    study_code: String
+    study_id: String
+    study_name: String
+    study_type: String
+}
+
+type StudyDetail {
+    study_code: String
+    study_id: String
+    study_name: String
+    description: String
+    actual_start_date: String
+    actual_completeion_date: String
+    organization: String
+    cases: Int
+}
+
 schema {
     query: QueryType
 }
 
 type QueryType {
+
+    studyInfo: [StudyInfo]
+
+    studyDetail (study_code: String): StudyDetail
 }
