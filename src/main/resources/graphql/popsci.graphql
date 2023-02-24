@@ -19,6 +19,10 @@ type StudyDetail {
     cases: Int
 }
 
+type IdsList {
+    case_ids: [String]
+}
+
 schema {
     query: QueryType
 }
@@ -53,4 +57,7 @@ type QueryType {
             cases: COUNT(c)
         }
     """, passThrough: true)
+    studyDetail (study_code: String): StudyDetail
+
+    idsList: IdsList
 }
