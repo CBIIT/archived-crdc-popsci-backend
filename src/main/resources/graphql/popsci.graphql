@@ -14,7 +14,7 @@ type StudyDetail {
     study_type: String
     description: String
     actual_start_date: String
-    actual_completeion_date: String
+    actual_completion_date: String
     organization: String
     cases: Int
 }
@@ -25,7 +25,32 @@ schema {
 
 type QueryType {
 
-    studyInfo: [StudyInfo]
+    studyInfo: [StudyInfo] @cypher(statement: """
+        MATCH (ct)<-[:of_clinical_trial]-(co)<--(c)
+        RETURN 
+            {
+                cases: COUNT(c),
+                program: ct.clinical_trial_short_name,
+                study_code: co.cohort_id,
+                study_id: co.clinical_trials_gov_id,
+                study_name: co.cohort_title,
+                study_type: ct.clinical_trial_type
+            }
+    """, passThrough: true)
 
-    studyDetail (study_code: String): StudyDetail
+    studyDetail (study_code: String): StudyDetail @cypher(statement: """
+        MATCH (ct)<-[:of_clinical_trial]-(co)<--(c)
+        RETURN 
+        {
+            study_code: co.cohort_id,
+            study_id: co.clinical_trials_gov_id,
+            study_name: co.cohort_title,
+            study_type: ct.clinical_trial_type,
+            description: co.cohort_description,
+            actual_start_date: co.start_date,
+            actual_completion_date: co.completion_date,
+            organization: ct.lead_organization,
+            cases: COUNT(c)
+        }
+    """, passThrough: true)
 }
