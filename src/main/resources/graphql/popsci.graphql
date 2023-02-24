@@ -19,8 +19,8 @@ type StudyDetail {
     cases: Int
 }
 
-type IdsLists {
-    caseIds: [String]
+type IdsList {
+    case_ids: [String]
 }
 
 schema {
@@ -33,5 +33,5 @@ type QueryType {
 
     studyDetail (study_code: String): StudyDetail
 
-    idsLists: IdsLists
+    idsList: IdsList
 }
