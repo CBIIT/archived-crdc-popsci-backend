@@ -57,7 +57,6 @@ type QueryType {
             cases: COUNT(c)
         }
     """, passThrough: true)
-    studyDetail (study_code: String): StudyDetail
 
     idsList: IdsList
 }
