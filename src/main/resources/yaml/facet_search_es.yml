@@ -109,20 +109,20 @@ queries:
         index:
           - cases
         filter:
-          type: aggregation
+          type: range
           selectedField: enrollment_year
           ignoreSelectedField: true
         result:
-          type: group_count
+          type: range
       - name: filterCaseCountByEnrollmentAge
         index:
           - cases
         filter:
-          type: aggregation
+          type: range
           selectedField: enrollment_age
           ignoreSelectedField: true
         result:
-          type: group_count
+          type: range
       - name: filterCaseCountBySex
         index:
           - cases
@@ -163,11 +163,11 @@ queries:
         index:
           - cases
         filter:
-          type: aggregation
+          type: range
           selectedField: dx_age
           ignoreSelectedField: true
         result:
-          type: group_count
+          type: range
       - name: filterCaseCountByBiospecimensAvailable
         index:
           - cases

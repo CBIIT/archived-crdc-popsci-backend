@@ -26,17 +26,23 @@ type SearchResult {
 
     filterCaseCountByStudy: [GroupCount]
     filterCaseCountByStudyType: [GroupCount]
-    filterCaseCountByEnrollmentYear: [GroupCount]
-    filterCaseCountByEnrollmentAge: [GroupCount]
+    filterCaseCountByEnrollmentYear: RangeCount
+    filterCaseCountByEnrollmentAge: RangeCount
     filterCaseCountBySex: [GroupCount]
     filterCaseCountByRace: [GroupCount]
     filterCaseCountByEthnicity: [GroupCount]
     filterCaseCountByDiagnosedCancerType: [GroupCount]
-    filterCaseCountByDiagnosedAge: [GroupCount]
+    filterCaseCountByDiagnosedAge: RangeCount
     filterCaseCountByBiospecimensAvailable: [GroupCount]
 }
 type GroupCount {
     group: String
+    subjects: Int
+}
+
+type RangeCount {
+    lowerBound: Float
+    upperBound: Float
     subjects: Int
 }
 
