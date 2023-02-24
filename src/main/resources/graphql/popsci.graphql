@@ -19,6 +19,10 @@ type StudyDetail {
     cases: Int
 }
 
+type IdsLists {
+    caseIds: [String]
+}
+
 schema {
     query: QueryType
 }
@@ -28,4 +32,6 @@ type QueryType {
     studyInfo: [StudyInfo]
 
     studyDetail (study_code: String): StudyDetail
+
+    idsLists: IdsLists
 }
