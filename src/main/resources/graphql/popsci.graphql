@@ -11,6 +11,7 @@ type StudyDetail {
     study_code: String
     study_id: String
     study_name: String
+    study_type: String
     description: String
     actual_start_date: String
     actual_completeion_date: String
