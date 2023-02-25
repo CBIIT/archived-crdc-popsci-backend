@@ -104,7 +104,7 @@ Indices:
       RETURN DISTINCT
 
       c.colo_case_id AS case_id,
-      c.colo_id AS case_ids,
+      c.colo_case_id AS case_ids,
 
       CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arm,
       CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arms,

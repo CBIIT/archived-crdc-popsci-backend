@@ -92,7 +92,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: study
+          selectedField: studies
           ignoreSelectedField: true
         result:
           type: group_count
@@ -101,7 +101,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: study_type
+          selectedField: study_types
           ignoreSelectedField: true
         result:
           type: group_count
@@ -110,7 +110,7 @@ queries:
           - cases
         filter:
           type: range
-          selectedField: enrollment_year
+          selectedField: enrollment_years
           ignoreSelectedField: true
         result:
           type: range
@@ -119,7 +119,7 @@ queries:
           - cases
         filter:
           type: range
-          selectedField: enrollment_age
+          selectedField: enrollment_ages
           ignoreSelectedField: true
         result:
           type: range
@@ -128,7 +128,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: sex
+          selectedField: sexes
           ignoreSelectedField: true
         result:
           type: group_count
@@ -137,7 +137,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: race
+          selectedField: races
           ignoreSelectedField: true
         result:
           type: group_count
@@ -146,7 +146,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: ethnicity
+          selectedField: ethnicities
           ignoreSelectedField: true
         result:
           type: group_count
@@ -155,7 +155,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: dx_cancer_type
+          selectedField: dx_cancer_types
           ignoreSelectedField: true
         result:
           type: group_count
@@ -164,7 +164,7 @@ queries:
           - cases
         filter:
           type: range
-          selectedField: dx_age
+          selectedField: dx_ages
           ignoreSelectedField: true
         result:
           type: range
