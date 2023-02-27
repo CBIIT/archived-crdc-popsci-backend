@@ -1,5 +1,5 @@
 type CaseOverview {
-    case_ids: String
+    case_id: String
     clinical_trial: String
     study: String
     center: String
@@ -51,14 +51,6 @@ schema {
 }
 
 type QueryType {
-    esVersion: String
-    numberOfPrograms: Int
-    numberOfStudies: Int
-    numberOfCases: Int
-    numberOfSamples: Int
-    numberOfLabProcedures: Int
-    numberOfFiles: Int
-
     searchCases (
         case_ids: [String] = [],
 
