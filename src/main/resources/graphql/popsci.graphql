@@ -17,6 +17,10 @@ type StudyDetail {
     actual_completion_date: String
     organization: String
     cases: Int
+    numberOfPrograms: Int
+    numberOfStudies: Int
+    numberOfCases: Int
+    numberOfFiles: Int
 }
 
 type IdsList {
@@ -43,7 +47,7 @@ type QueryType {
     """, passThrough: true)
 
     studyDetail (study_code: String): StudyDetail @cypher(statement: """
-        MATCH (ct)<-[:of_clinical_trial]-(co)<--(c)
+        MATCH (ct)<-[:of_clinical_trial]-(co:cohort {cohort_id: $study_code})<--(c)
         RETURN 
         {
             study_code: co.cohort_id,
@@ -54,7 +58,11 @@ type QueryType {
             actual_start_date: co.start_date,
             actual_completion_date: co.completion_date,
             organization: ct.lead_organization,
-            cases: COUNT(c)
+            cases: COUNT(c),
+            numberOfPrograms: 1,
+            numberOfStudies: 1,
+            numberOfCases: COUNT(c),
+            numberOfFiles: 0
         }
     """, passThrough: true)
 
