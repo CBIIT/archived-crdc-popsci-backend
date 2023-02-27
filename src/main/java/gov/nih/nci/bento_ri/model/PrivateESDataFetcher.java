@@ -44,7 +44,6 @@ public class PrivateESDataFetcher extends AbstractPrivateESDataFetcher {
                         .dataFetcher("numberOfSamples", env -> getNodeCount(SAMPLES_COUNT_END_POINT))
                         .dataFetcher("numberOfLabProcedures", env -> getNodeCount(LAB_PROCEDURE_COUNT_END_POINT))
                         .dataFetcher("numberOfFiles", env -> getNodeCount(FILES_COUNT_END_POINT))
-                        .dataFetcher("idsLists", env -> idsLists())
                         .dataFetcher("programInfo", env -> programInfo())
                         .dataFetcher("programDetail", env -> {
                             Map<String, Object> args = env.getArguments();

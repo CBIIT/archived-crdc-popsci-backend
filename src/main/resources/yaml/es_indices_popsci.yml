@@ -63,186 +63,37 @@ Indices:
         
     # Cypher query will be used to retrieve data from Neo4j, and index into Elasticsearch
     cypher_query: "
-      MATCH (d:demo)-[:demo_of_breast_case]->(c)-[:breast_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
+      MATCH (d:demo)-->(c:case)-->(co:cohort)-->(ct:clinical_trial)
+      WITH d, c, co, ct, 'Not Specified' AS n
       RETURN DISTINCT
-
-      c.breast_case_id AS case_id,
-      c.breast_case_id AS case_ids,
-
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arm,
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arms,
-      CASE c.biosp_f WHEN '' THEN 'Not Specified' ELSE c.biosp_f END AS biospecimens_available,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS center,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS centers,
-      c.plco_dx_age AS dx_age,
-      c.plco_dx_age AS dx_ages,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_type,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_types,
-      c.rndyear AS enrollment_year,
-      c.rndyear AS enrollment_years,
-
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS study,
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS studies,
-
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trial,
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trials,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_type,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_types,
-
-      d.age AS enrollment_age,
-      d.age AS enrollment_ages,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicity,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicities,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS race,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS races,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sex,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sexes
-
-      UNION
-
-      MATCH (d:demo)-[:demo_of_colo_case]->(c)-[:colo_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
-      RETURN DISTINCT
-
-      c.colo_case_id AS case_id,
-      c.colo_case_id AS case_ids,
-
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arm,
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arms,
-      CASE c.biosp_f WHEN '' THEN 'Not Specified' ELSE c.biosp_f END AS biospecimens_available,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS center,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS centers,
-      c.plco_dx_age AS dx_age,
-      c.plco_dx_age AS dx_ages,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_type,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_types,
-      c.rndyear AS enrollment_year,
-      c.rndyear AS enrollment_years,
-
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS study,
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS studies,
-
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trial,
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trials,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_type,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_types,
-
-      d.age AS enrollment_age,
-      d.age AS enrollment_ages,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicity,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicities,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS race,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS races,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sex,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sexes
-
-      UNION
-
-      MATCH (d:demo)-[:demo_of_lung_case]->(c)-[:lung_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
-      RETURN DISTINCT
-
-      c.lung_case_id AS case_id,
-      c.lung_case_id AS case_ids,
-
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arm,
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arms,
-      CASE c.biosp_f WHEN '' THEN 'Not Specified' ELSE c.biosp_f END AS biospecimens_available,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS center,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS centers,
-      c.plco_dx_age AS dx_age,
-      c.plco_dx_age AS dx_ages,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_type,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_types,
-      c.rndyear AS enrollment_year,
-      c.rndyear AS enrollment_years,
-
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS study,
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS studies,
-
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trial,
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trials,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_type,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_types,
-
-      d.age AS enrollment_age,
-      d.age AS enrollment_ages,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicity,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicities,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS race,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS races,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sex,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sexes
-
-      UNION
-
-      MATCH (d:demo)-[:demo_of_ovar_case]->(c)-[:ovar_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
-      RETURN DISTINCT
-
-      c.ovar_case_id AS case_id,
-      c.ovar_case_id AS case_ids,
-
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arm,
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arms,
-      CASE c.biosp_f WHEN '' THEN 'Not Specified' ELSE c.biosp_f END AS biospecimens_available,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS center,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS centers,
-      c.plco_dx_age AS dx_age,
-      c.plco_dx_age AS dx_ages,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_type,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_types,
-      c.rndyear AS enrollment_year,
-      c.rndyear AS enrollment_years,
-
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS study,
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS studies,
-
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trial,
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trials,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_type,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_types,
-
-      d.age AS enrollment_age,
-      d.age AS enrollment_ages,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicity,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicities,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS race,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS races,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sex,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sexes
-
-      UNION
-
-      MATCH (d:demo)-[:demo_of_pros_case]->(c)-[:pros_case_of_cohort]->(co)-[:of_clinical_trial]->(ct)
-      RETURN DISTINCT
-
-      c.pros_case_id AS case_id,
-      c.pros_case_id AS case_ids,
-
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arm,
-      CASE c.arm WHEN '' THEN 'Not Specified' ELSE c.arm END AS arms,
-      CASE c.biosp_f WHEN '' THEN 'Not Specified' ELSE c.biosp_f END AS biospecimens_available,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS center,
-      CASE c.center WHEN '' THEN 'Not Specified' ELSE c.center END AS centers,
-      c.plco_dx_age AS dx_age,
-      c.plco_dx_age AS dx_ages,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_type,
-      CASE c.plco_dx WHEN '' THEN 'Not Specified' ELSE c.plco_dx END AS dx_cancer_types,
-      c.rndyear AS enrollment_year,
-      c.rndyear AS enrollment_years,
-
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS study,
-      CASE co.cohort_id WHEN '' THEN 'Not Specified' ELSE co.cohort_id END AS studies,
-
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trial,
-      CASE ct.clinical_trial_short_name WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_short_name END AS clinical_trials,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_type,
-      CASE ct.clinical_trial_type WHEN '' THEN 'Not Specified' ELSE ct.clinical_trial_type END AS study_types,
-
-      d.age AS enrollment_age,
-      d.age AS enrollment_ages,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicity,
-      CASE d.hispanic_f WHEN '' THEN 'Not Specified' ELSE d.hispanic_f END AS ethnicities,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS race,
-      CASE d.race7 WHEN '' THEN 'Not Specified' ELSE d.race7 END AS races,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sex,
-      CASE d.sex WHEN '' THEN 'Not Specified' ELSE d.sex END AS sexes
+        c.case_id as case_id,
+        c.case_id as case_ids,
+        COALESCE(c.arm, n) AS arm,
+        COALESCE(c.arm, n) AS arms,
+        COALESCE(c.biosp_f, n) AS biospecimens_available,
+        COALESCE(c.center, n) AS center,
+        COALESCE(c.center, n) AS centers,
+        c.plco_dx_age AS dx_age,
+        c.plco_dx_age AS dx_ages,
+        c.plco_dx AS dx_cancer_type,
+        c.plco_dx AS dx_cancer_types,
+        c.rndyear AS enrollment_year,
+        c.rndyear AS enrollment_years,
+  
+        COALESCE(co.cohort_id, n) AS study,
+        COALESCE(co.cohort_id, n) AS studies,
+  
+        COALESCE(ct.clinical_trial_short_name, n) AS clinical_trial,
+        COALESCE(ct.clinical_trial_short_name, n) AS clinical_trials,
+        COALESCE(ct.clinical_trial_type, n) AS study_type,
+        COALESCE(ct.clinical_trial_type, n) AS study_types,
+  
+        d.age AS enrollment_age,
+        d.age AS enrollment_ages,
+        COALESCE(d.hispanic_f, n) AS ethnicity,
+        COALESCE(d.hispanic_f, n) AS ethnicities,
+        COALESCE(d.race7, n) AS race,
+        COALESCE(d.race7, n) AS races,
+        COALESCE(d.sex, n) AS sex,
+        COALESCE(d.sex, n) AS sexes
       "

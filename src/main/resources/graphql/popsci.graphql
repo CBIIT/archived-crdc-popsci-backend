@@ -23,8 +23,13 @@ type StudyDetail {
     numberOfFiles: Int
 }
 
-type IdsList {
-    case_ids: [String]
+type IdsLists{
+	case_ids: [String]
+}
+
+type CaseResult{
+	case_id: String
+	cohort_id: String
 }
 
 schema {
@@ -65,6 +70,18 @@ type QueryType {
             numberOfFiles: 0
         }
     """, passThrough: true)
+
+    findCaseIdsInList(case_ids: [String] = []): [CaseResult] @cypher(statement: """
+		MATCH (c:case)-->(co:cohort)
+		RETURN
+			c.case_id AS case_id,
+			co.cohort_id AS cohort_id
+	""", passThrough: true)
+
+	idsLists: IdsLists @cypher(statement: """
+		MATCH (c:case)
+		RETURN COLLECT(DISTINCT c.case_id) AS case_ids
+	""", passThrough: true)
 
     idsList: IdsList
 }
