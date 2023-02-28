@@ -67,7 +67,7 @@ type QueryType {
     ): SearchResult
 
     caseOverview (
-        case_ids: [String] = [],
+        case_id: [String] = [],
 
         studies: [String] = [],
         study_types: [String] = [],
