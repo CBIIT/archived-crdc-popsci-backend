@@ -39,10 +39,10 @@ schema {
 type QueryType {
 
     studyInfo: [StudyInfo] @cypher(statement: """
-        MATCH (ct)<-[:of_clinical_trial]-(co)<--(c)
+        MATCH (ct:clinical_trial)<--(co:cohort)<--(c:case)
         RETURN 
             {
-                cases: COUNT(c),
+                cases: COUNT(DISTINCT c),
                 program: ct.clinical_trial_short_name,
                 study_code: co.cohort_id,
                 study_id: co.clinical_trials_gov_id,
@@ -52,7 +52,7 @@ type QueryType {
     """, passThrough: true)
 
     studyDetail (study_code: String): StudyDetail @cypher(statement: """
-        MATCH (ct)<-[:of_clinical_trial]-(co:cohort {cohort_id: $study_code})<--(c)
+        MATCH (ct:clinical_trial)<--(co:cohort {cohort_id: $study_code})<--(c:case)
         RETURN 
         {
             study_code: co.cohort_id,
@@ -63,10 +63,10 @@ type QueryType {
             actual_start_date: co.start_date,
             actual_completion_date: co.completion_date,
             organization: ct.lead_organization,
-            cases: COUNT(c),
+            cases: COUNT(DISTINCT c),
             numberOfPrograms: 1,
             numberOfStudies: 1,
-            numberOfCases: COUNT(c),
+            numberOfCases: COUNT(DISTINCT c),
             numberOfFiles: 0
         }
     """, passThrough: true)

@@ -80,8 +80,8 @@ Indices:
         c.rndyear AS enrollment_year,
         c.rndyear AS enrollment_years,
   
-        COALESCE(co.cohort_id, n) AS study,
-        COALESCE(co.cohort_id, n) AS studies,
+        COLLECT(COALESCE(co.cohort_id, n)) AS study,
+        COLLECT(COALESCE(co.cohort_id, n)) AS studies,
   
         COALESCE(ct.clinical_trial_short_name, n) AS clinical_trial,
         COALESCE(ct.clinical_trial_short_name, n) AS clinical_trials,
