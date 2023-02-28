@@ -8,25 +8,25 @@ type QueryType {
     numberOfPrograms: Int @cypher(statement: """
         MATCH (ct:clinical_trial)
         RETURN 
-        COUNT(ct)
+        COUNT(DISTINCT ct)
     """, passThrough: true)
     
     numberOfStudies: Int @cypher(statement: """
         MATCH (co:cohort)
         RETURN 
-        COUNT(co)
+        COUNT(DISTINCT co)
     """, passThrough: true)
     
     numberOfCases: Int @cypher(statement: """
         MATCH (:cohort)<--(c)
         RETURN
-        COUNT(c)
+        COUNT(DISTINCT c)
     """, passThrough: true)
     
     numberOfFiles: Int @cypher(statement: """
         MATCH (:cohort)<--(c)
         RETURN 
-        COUNT(c.file)
+        COUNT(DISTINCT c.file)
     """, passThrough: true)
     
 }
