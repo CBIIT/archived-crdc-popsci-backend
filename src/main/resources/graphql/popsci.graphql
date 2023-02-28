@@ -82,6 +82,4 @@ type QueryType {
 		MATCH (c:case)
 		RETURN COLLECT(DISTINCT c.case_id) AS case_ids
 	""", passThrough: true)
-
-    idsList: IdsList
 }
