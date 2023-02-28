@@ -73,13 +73,17 @@ type QueryType {
 
     findCaseIdsInList(case_ids: [String] = []): [CaseResult] @cypher(statement: """
 		MATCH (c:case)-->(co:cohort)
-		RETURN
-			c.case_id AS case_id,
-			co.cohort_id AS cohort_id
+		RETURN {
+		    case_id: c.case_id,
+		    cohort_id: co.cohort_id
+		}
 	""", passThrough: true)
 
 	idsLists: IdsLists @cypher(statement: """
 		MATCH (c:case)
-		RETURN COLLECT(DISTINCT c.case_id) AS case_ids
+		WITH COLLECT(DISTINCT c.case_id) AS cases
+		RETURN {
+		    case_ids: cases
+		}
 	""", passThrough: true)
 }
