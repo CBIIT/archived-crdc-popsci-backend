@@ -73,6 +73,7 @@ type QueryType {
 
     findCaseIdsInList(case_ids: [String] = []): [CaseResult] @cypher(statement: """
 		MATCH (c:case)-->(co:cohort)
+		WHERE c.case_id IN $case_ids
 		RETURN {
 		    case_id: c.case_id,
 		    cohort_id: co.cohort_id
