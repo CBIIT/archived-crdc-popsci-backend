@@ -59,7 +59,7 @@ queries:
           - cases
         filter:
           type: aggregation
-          selectedField: enrollment_age
+          selectedField: enrollment_age_level
         result:
           type: group_count
       - name: caseCountBySex
