@@ -97,3 +97,29 @@ Indices:
         COALESCE(d.sex, n) AS sex,
         COALESCE(d.sex, n) AS sexes
       "
+  - index_name: studies
+    type: neo4j
+    # type mapping for each property of the index
+    mapping:
+      study_id:
+        type: keyword
+      study_code:
+        type: keyword
+      study_name:
+        type: keyword
+      study_type:
+        type: keyword
+      program:
+        type: keyword
+      num_cases:
+        type: integer
+    cypher_query: "
+      MATCH (ct:clinical_trial)<--(co:cohort)<--(c:case)
+      RETURN
+        co.clinical_trials_gov_id AS study_id,
+        co.cohort_id AS study_code,
+        co.cohort_title AS study_name,
+        ct.clinical_trial_type AS study_type,
+        ct.clinical_trial_short_name AS program
+        COUNT(DISTINCT c) AS num_cases
+    "
