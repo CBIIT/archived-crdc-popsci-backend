@@ -37,9 +37,9 @@ Indices:
       enrollment_ages:
         type: integer
       enrollment_age_level:
-        type: integer
+        type: keyword
       enrollment_age_levels:
-        type: integer
+        type: keyword
       enrollment_year:
         type: integer
       enrollment_years:
