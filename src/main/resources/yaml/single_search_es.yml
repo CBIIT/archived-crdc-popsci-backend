@@ -16,3 +16,17 @@ queries:
         - enrollment_years
     result:
       type: object_array
+  - name: studyInfo
+    index: 
+      - studies
+    filter:
+      type: default
+    result:
+      type: object_array
+
+  - name: studyDetail
+    index: studies
+        filter:
+      type: default
+    result:
+      type: object
