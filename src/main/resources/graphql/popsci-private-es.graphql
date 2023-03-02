@@ -47,7 +47,7 @@ type RangeCount {
 }
 
 type StudyInfo {
-    num_cases: Int
+    cases: Int
     program: String
     study_code: String
     study_id: String
@@ -64,7 +64,7 @@ type StudyDetail {
     actual_start_date: String
     actual_completion_date: String
     organization: String
-    num_cases: Int
+    cases: Int
     numberOfPrograms: Int
     numberOfStudies: Int
     numberOfCases: Int
