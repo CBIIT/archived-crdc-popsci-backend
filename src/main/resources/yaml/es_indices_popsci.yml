@@ -36,6 +36,10 @@ Indices:
         type: integer
       enrollment_ages:
         type: integer
+      enrollment_age_level:
+        type: keyword
+      enrollment_age_levels:
+        type: keyword
       enrollment_year:
         type: integer
       enrollment_years:
@@ -90,8 +94,10 @@ Indices:
   
         d.age AS enrollment_age,
         d.age AS enrollment_ages,
-        COALESCE(d.hispanic_f, n) AS ethnicity,
-        COALESCE(d.hispanic_f, n) AS ethnicities,
+        d.agelevel AS enrollment_age_level,
+        d.agelevel AS enrollment_age_levels,
+        CASE d.hispanic_f WHEN '' THEN n ELSE d.hispanic_f END AS ethnicity,
+        CASE d.hispanic_f WHEN '' THEN n ELSE d.hispanic_f END AS ethnicities,
         COALESCE(d.race7, n) AS race,
         COALESCE(d.race7, n) AS races,
         COALESCE(d.sex, n) AS sex,
