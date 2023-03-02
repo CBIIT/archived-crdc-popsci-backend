@@ -1,28 +1,3 @@
-type StudyInfo {
-    cases: Int
-    program: String 
-    study_code: String
-    study_id: String
-    study_name: String
-    study_type: String
-}
-
-type StudyDetail {
-    study_code: String
-    study_id: String
-    study_name: String
-    study_type: String
-    description: String
-    actual_start_date: String
-    actual_completion_date: String
-    organization: String
-    cases: Int
-    numberOfPrograms: Int
-    numberOfStudies: Int
-    numberOfCases: Int
-    numberOfFiles: Int
-}
-
 type IdsLists{
 	case_ids: [String]
 }
@@ -37,40 +12,6 @@ schema {
 }
 
 type QueryType {
-
-    studyInfo: [StudyInfo] @cypher(statement: """
-        MATCH (ct:clinical_trial)<--(co:cohort)<--(c:case)
-        RETURN 
-            {
-                cases: COUNT(DISTINCT c),
-                program: ct.clinical_trial_short_name,
-                study_code: co.cohort_id,
-                study_id: co.clinical_trials_gov_id,
-                study_name: co.cohort_title,
-                study_type: ct.clinical_trial_type
-            }
-    """, passThrough: true)
-
-    studyDetail (study_code: String): StudyDetail @cypher(statement: """
-        MATCH (ct:clinical_trial)<--(co:cohort {cohort_id: $study_code})<--(c:case)
-        RETURN 
-        {
-            study_code: co.cohort_id,
-            study_id: co.clinical_trials_gov_id,
-            study_name: co.cohort_title,
-            study_type: ct.clinical_trial_type,
-            description: co.cohort_description,
-            actual_start_date: co.start_date,
-            actual_completion_date: co.completion_date,
-            organization: ct.lead_organization,
-            cases: COUNT(DISTINCT c),
-            numberOfPrograms: 1,
-            numberOfStudies: 1,
-            numberOfCases: COUNT(DISTINCT c),
-            numberOfFiles: 0
-        }
-    """, passThrough: true)
-
     findCaseIdsInList(case_ids: [String] = []): [CaseResult] @cypher(statement: """
 		MATCH (c:case)-->(co:cohort)
 		WHERE c.case_id IN $case_ids

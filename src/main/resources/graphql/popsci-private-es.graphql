@@ -46,6 +46,31 @@ type RangeCount {
     subjects: Int
 }
 
+type StudyInfo {
+    num_cases: Int
+    program: String
+    study_code: String
+    study_id: String
+    study_name: String
+    study_type: String
+}
+
+type StudyDetail {
+    study_code: String
+    study_id: String
+    study_name: String
+    study_type: String
+    description: String
+    actual_start_date: String
+    actual_completion_date: String
+    organization: String
+    num_cases: Int
+    numberOfPrograms: Int
+    numberOfStudies: Int
+    numberOfCases: Int
+    numberOfFiles: Int
+}
+
 schema {
     query: QueryType
 }
@@ -86,5 +111,7 @@ type QueryType {
         offset: Int = 0
     ): [CaseOverview]
 
-    
+    studyInfo: [StudyInfo]
+
+    studyDetail (study_code: String): [StudyDetail]
 }
