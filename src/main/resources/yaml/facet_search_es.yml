@@ -10,7 +10,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: int
           method: count_bucket_keys
@@ -23,7 +22,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: int
           method: count_bucket_keys
@@ -36,7 +34,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: int
           method: count_bucket_keys
@@ -49,7 +46,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: int
           method: count_bucket_keys
@@ -63,7 +59,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: caseCountByEnrollmentYear
@@ -75,7 +70,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: caseCountByEnrollmentAge
@@ -87,7 +81,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: caseCountBySex
@@ -99,7 +92,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: caseCountByRace
@@ -111,7 +103,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: caseCountByEthnicity
@@ -123,7 +114,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
 
@@ -137,7 +127,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: filterCaseCountByStudyType
@@ -150,7 +139,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: filterCaseCountByEnrollmentYear
@@ -163,7 +151,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: range
       - name: filterCaseCountByEnrollmentAge
@@ -176,7 +163,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: range
       - name: filterCaseCountBySex
@@ -189,7 +175,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: filterCaseCountByRace
@@ -202,7 +187,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: filterCaseCountByEthnicity
@@ -215,7 +199,6 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: filterCaseCountByDiagnosedCancerType
@@ -228,22 +211,20 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count
       - name: filterCaseCountByDiagnosedAge
         index:
           - cases
         filter:
-          type: range
+          type: aggregation
           selectedField: dx_ages
           ignoreSelectedField: true
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
-          type: range
+          type: group_count
       - name: filterCaseCountByBiospecimensAvailable
         index:
           - cases
@@ -254,6 +235,5 @@ queries:
           rangeFilterFields:
             - enrollment_years
             - enrollment_ages
-            - dx_ages
         result:
           type: group_count

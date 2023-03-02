@@ -25,9 +25,9 @@ Indices:
       clinical_trials:
         type: keyword
       dx_age:
-        type: integer
+        type: keyword
       dx_ages:
-        type: integer
+        type: keyword
       dx_cancer_type:
         type: keyword
       dx_cancer_types:
@@ -77,8 +77,8 @@ Indices:
         COALESCE(c.biosp_f, n) AS biospecimens_available,
         COALESCE(c.center, n) AS center,
         COALESCE(c.center, n) AS centers,
-        c.plco_dx_age AS dx_age,
-        c.plco_dx_age AS dx_ages,
+        COALESCE(c.plco_dx_age, n) AS dx_age,
+        COALESCE(c.plco_dx_age, n) AS dx_ages,
         CASE c.plco_dx WHEN '' THEN n ELSE c.plco_dx END AS dx_cancer_type,
         CASE c.plco_dx WHEN '' THEN n ELSE c.plco_dx END AS dx_cancer_types,
         c.rndyear AS enrollment_year,

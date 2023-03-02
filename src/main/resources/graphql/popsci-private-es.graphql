@@ -62,7 +62,7 @@ type QueryType {
         races: [String] = [],
         ethnicities: [String] = [],
         dx_cancer_types: [String] = [],
-        dx_ages: [Float] = [],
+        dx_ages: [String] = [],
         biospecimens_available: [String] = [],
     ): SearchResult
 
@@ -77,7 +77,7 @@ type QueryType {
         races: [String] = [],
         ethnicities: [String] = [],
         dx_cancer_types: [String] = [],
-        dx_ages: [Float] = [],
+        dx_ages: [String] = [],
         biospecimens_available: [String] = [],
 
         order_by: String = "",

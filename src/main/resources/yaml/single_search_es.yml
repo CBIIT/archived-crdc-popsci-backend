@@ -8,8 +8,6 @@ queries:
       alternativeSortField:
         subject_id: case_id
       rangeFilterFields:
-        - dx_age
-        - dx_ages
         - enrollment_age
         - enrollment_ages
         - enrollment_year
