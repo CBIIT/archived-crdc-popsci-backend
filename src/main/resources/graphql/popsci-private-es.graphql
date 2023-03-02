@@ -32,7 +32,7 @@ type SearchResult {
     filterCaseCountByRace: [GroupCount]
     filterCaseCountByEthnicity: [GroupCount]
     filterCaseCountByDiagnosedCancerType: [GroupCount]
-    filterCaseCountByDiagnosedAge: RangeCount
+    filterCaseCountByDiagnosedAge: [GroupCount]
     filterCaseCountByBiospecimensAvailable: [GroupCount]
 }
 type GroupCount {
