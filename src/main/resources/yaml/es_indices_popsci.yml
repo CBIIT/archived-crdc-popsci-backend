@@ -79,8 +79,8 @@ Indices:
         COALESCE(c.center, n) AS centers,
         c.plco_dx_age AS dx_age,
         c.plco_dx_age AS dx_ages,
-        c.plco_dx AS dx_cancer_type,
-        c.plco_dx AS dx_cancer_types,
+        CASE c.plco_dx WHEN '' THEN n ELSE c.plco_dx END AS dx_cancer_type,
+        CASE c.plco_dx WHEN '' THEN n ELSE c.plco_dx END AS dx_cancer_types,
         c.rndyear AS enrollment_year,
         c.rndyear AS enrollment_years,
   
