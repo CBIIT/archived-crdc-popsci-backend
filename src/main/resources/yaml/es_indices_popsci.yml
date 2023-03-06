@@ -137,9 +137,22 @@ Indices:
         type: integer
       numberOfFiles: 
         type: integer
+      files:
+        type: nested
+        properties:
+          file_name:
+            type: keyword
+          file_type:
+            type: keyword
+          file_description:
+            type: keyword
+          file_format:
+            type: keyword
+          file_size:
+            type: keyword
         
     cypher_query: "
-      MATCH (ct:clinical_trial)<--(co:cohort)<--(c:case)
+      MATCH (ct:clinical_trial)<--(co:cohort)<--(c:case), (co)<--(f:file)
       RETURN
         co.clinical_trials_gov_id AS study_id,
         co.cohort_id AS study_code,
@@ -154,5 +167,13 @@ Indices:
         COUNT(DISTINCT ct) AS numberOfPrograms,
         COUNT(DISTINCT co) AS numberOfStudies,
         COUNT(DISTINCT c) AS numberOfCases,
-        COUNT(DISTINCT c.file) AS numberOfFiles
+        COUNT(DISTINCT f) AS numberOfFiles,
+
+        COLLECT(DISTINCT {
+          file_name: f.file_name,
+          file_type: f.file_type,
+          file_description: f.file_description,
+          file_format: f.file_format,
+          file_size: f.file_size
+        }) AS files
     "

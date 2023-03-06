@@ -55,6 +55,14 @@ type StudyInfo {
     study_type: String
 }
 
+type File{
+    file_name: String
+    file_type: String
+    file_description: String
+    file_format: String
+    file_size: String
+}
+
 type StudyDetail {
     study_code: String
     study_id: String
@@ -65,6 +73,7 @@ type StudyDetail {
     actual_completion_date: String
     organization: String
     cases: Int
+    files: [File]
     numberOfPrograms: Int
     numberOfStudies: Int
     numberOfCases: Int
