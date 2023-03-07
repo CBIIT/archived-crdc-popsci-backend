@@ -24,9 +24,9 @@ type QueryType {
     """, passThrough: true)
     
     numberOfFiles: Int @cypher(statement: """
-        MATCH (:cohort)<--(c)
+        MATCH (f:file)
         RETURN 
-        COUNT(DISTINCT c.file)
+        COUNT(DISTINCT f)
     """, passThrough: true)
     
 }
