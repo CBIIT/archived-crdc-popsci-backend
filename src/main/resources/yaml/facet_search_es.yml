@@ -39,7 +39,7 @@ queries:
           method: count_bucket_keys
       - name: numberOfFiles
         index:
-          - studies
+          - cases
         filter:
           type: aggregation
           selectedField: files
