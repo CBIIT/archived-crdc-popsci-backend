@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>com.graphql-java-kickstart</groupId>
 			<artifactId>graphql-java-tools</artifactId>
-			<version>5.4.0</version>
+			<version>14.0.1</version>
 		</dependency>
 
 		<!-- GSON -->
@@ -210,7 +210,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-core</artifactId>
-            <version>1.12.147</version>
+            <version>1.12.783</version>
             <scope>compile</scope>
         </dependency>
 
