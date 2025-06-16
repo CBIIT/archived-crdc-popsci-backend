@@ -23,7 +23,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<spring.version>5.1.17.RELEASE</spring.version>
-		<spring.restdocs.version>2.0.5.RELEASE</spring.restdocs.version>
+		<spring.restdocs.version>3.0.0</spring.restdocs.version>
         <log4j2.version>2.17.1</log4j2.version>
 	</properties>
 
@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>com.graphql-java-kickstart</groupId>
 			<artifactId>graphql-java-tools</artifactId>
-			<version>5.4.0</version>
+			<version>12.0.1</version>
 		</dependency>
 
 		<!-- GSON -->
@@ -210,7 +210,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-core</artifactId>
-            <version>1.12.147</version>
+            <version>1.12.787</version>
             <scope>compile</scope>
         </dependency>
 
